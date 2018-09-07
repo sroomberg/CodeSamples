@@ -50,5 +50,39 @@ matrix = [
 	[01, 70, 54, 71, 83, 51, 54, 69, 16, 92, 33, 48, 61, 43, 52, 01, 89, 19, 67, 48]
 ]
 
+def dfs(nums, direction, x, y):
+	if len(nums) == 4:
+		return nums
+
+	if y == len(matrix):
+		x += 1
+		y = x
+		if x == len(matrix[0]):
+			return nums
+
+	if x == len(matrix[0]):
+		y += 1
+		x = y
+		if y == len(matrix):
+			return nums
+
+	nums.append(matrix[y][x])
+
+	if direction == 'v':	# vertical
+		y += 1
+		return dfs(nums, direction, x, y)
+
+	elif direction == 'h':	# horizontal
+		x += 1
+		return dfs(nums, direction, x, y)
+
+	elif direction == 'd':	# diagonal
+		x += 1
+		y += 1
+		return dfs(nums, direction, x, y)
+
+cur_nums = []
 cur_max = 0
+cur_x = 0
+cur_y = 0
 
